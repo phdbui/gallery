@@ -10,10 +10,10 @@ async function Images() {
   });
 
   return (
-    <section className="container mx-auto flex flex-wrap gap-4">
+    <section className="container mx-auto flex flex-wrap justify-between gap-4">
       {images.map((item) => (
-        <div key={item.id} className="w-[calc(33%-8px)] rounded border p-4">
-          <div className="relative h-64 w-full">
+        <div key={item.id} className="w-[calc(33%-10px)] rounded border p-4">
+          <div className="relative h-32 w-full md:h-64">
             <Image src={item.url} alt={item.url} fill />
           </div>
           <h1 className="text-2xl font-semibold">{item.name}</h1>

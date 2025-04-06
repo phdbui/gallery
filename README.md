@@ -7,7 +7,7 @@
 - [x] Actually set up database
 - [x] Attach database to ui
 - [x] Add authentication
-- [ ] Add image upload
+- [x] Add image upload
 - [ ] "taint" (server-only)
 - [ ] Error management {Sentry}
 - [ ] Routing/image page (parallel route)
