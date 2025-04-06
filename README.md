@@ -4,10 +4,11 @@
 
 - [x] Make it deploy
 - [x] Scaffold basic ui with data mock
-- [ ] Actually set up database
-- [ ] Attach database to ui
-- [ ] Add authentication
+- [x] Actually set up database
+- [x] Attach database to ui
+- [x] Add authentication
 - [ ] Add image upload
+- [ ] "taint" (server-only)
 - [ ] Error management {Sentry}
 - [ ] Routing/image page (parallel route)
 - [ ] Delete button (w/ server actions)

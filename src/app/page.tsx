@@ -1,13 +1,16 @@
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import Image from "next/image";
 import { db } from "~/server/db";
 
-export default async function HomePage() {
+export const dynamic = "force-dynamic";
+
+async function Images() {
   const images = await db.query.images.findMany({
     orderBy: (image, { desc }) => desc(image.createdAt),
   });
 
   return (
-    <main className="container mx-auto flex flex-wrap gap-4">
+    <section className="container mx-auto flex flex-wrap gap-4">
       {images.map((item) => (
         <div key={item.id} className="w-[calc(33%-8px)] rounded border p-4">
           <div className="relative h-64 w-full">
@@ -19,6 +22,21 @@ export default async function HomePage() {
           </p>
         </div>
       ))}
-    </main>
+    </section>
+  );
+}
+
+export default async function HomePage() {
+  return (
+    <>
+      <SignedOut>
+        <SignInButton>
+          <p>Please sign in</p>
+        </SignInButton>
+      </SignedOut>
+      <SignedIn>
+        <Images />
+      </SignedIn>
+    </>
   );
 }
