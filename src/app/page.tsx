@@ -1,28 +1,22 @@
 import Image from "next/image";
+import { db } from "~/server/db";
 
-const mockUrls = [
-  "https://gom5q4u851.ufs.sh/f/Iawfk97DLNEbxZzam6kEI4q0MtlTGWdCraAen7v6SkLo93cb",
-  "https://gom5q4u851.ufs.sh/f/Iawfk97DLNEbXj07PeMYufz47mCcH5hqgbVL9D6n3TOBAEWJ",
-  "https://gom5q4u851.ufs.sh/f/Iawfk97DLNEbLzMIuxkCwO8K4TPMNbq15uASF2eXsVpmyUHG",
-];
+export default async function HomePage() {
+  const images = await db.query.images.findMany({
+    orderBy: (image, { desc }) => desc(image.createdAt),
+  });
 
-const mockData = mockUrls.map((url, index) => ({
-  id: index + 1,
-  url,
-  title: `Title ${index + 1}`,
-  description: `Description for URL ${index + 1}`,
-}));
-
-export default function HomePage() {
   return (
-    <main className="container mx-auto flex flex-wrap">
-      {mockData.map((item) => (
-        <div key={item.id} className="w-1/3 rounded border p-4">
-          <h2 className="text-lg font-bold">{item.title}</h2>
-          <p className="text-gray-700">{item.description}</p>
+    <main className="container mx-auto flex flex-wrap gap-4">
+      {images.map((item) => (
+        <div key={item.id} className="w-[calc(33%-8px)] rounded border p-4">
           <div className="relative h-64 w-full">
-            <Image src={item.url} alt={item.title} fill />
+            <Image src={item.url} alt={item.url} fill />
           </div>
+          <h1 className="text-2xl font-semibold">{item.name}</h1>
+          <p className="text-sm text-gray-500">
+            Created at: {new Date(item.createdAt).toLocaleString("en-US")}
+          </p>
         </div>
       ))}
     </main>
